@@ -13,10 +13,33 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
             color: #ffffff;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(255, 0, 64, 0.1) 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(0, 255, 255, 0.1) 70%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.1) rotate(2deg); }
         }
 
         .container {
@@ -28,23 +51,49 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .header {
             text-align: center;
             margin-bottom: 4rem;
             animation: fadeInDown 1s ease-out;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #00ffff);
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.5; width: 100px; }
+            50% { opacity: 1; width: 200px; }
         }
 
         .title {
             font-size: 3.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff0040, #ff6b6b);
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #00ffff, #ff0040);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1rem;
             text-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .subtitle {
@@ -52,28 +101,37 @@
             color: #cccccc;
             letter-spacing: 2px;
             text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .activities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             margin-bottom: 3rem;
         }
 
         .activity-card {
-            background: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(30, 30, 60, 0.8);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 2rem;
-            text-align: center;
+            text-align: left;
             border: 1px solid rgba(255, 0, 64, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             animation: fadeInUp 1s ease-out;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
         }
 
         .activity-card:nth-child(1) { animation-delay: 0.1s; }
@@ -89,18 +147,42 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .activity-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 0, 64, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
         .activity-card:hover::before {
             left: 100%;
         }
 
+        .activity-card:hover::after {
+            opacity: 1;
+        }
+
         .activity-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-15px) scale(1.02);
             border-color: #ff0040;
-            box-shadow: 0 20px 40px rgba(255, 0, 64, 0.3);
+            box-shadow: 0 25px 50px rgba(255, 0, 64, 0.3), 0 0 30px rgba(0, 255, 255, 0.2);
+            background: rgba(40, 40, 80, 0.9);
+        }
+
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .activity-title {
@@ -109,30 +191,46 @@
             color: #ffffff;
             margin-bottom: 1rem;
             letter-spacing: 1px;
+            background: linear-gradient(45deg, #ffffff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .activity-description {
-            color: #aaaaaa;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            color: #bbbbbb;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            flex-grow: 1;
+            font-size: 1rem;
+            text-align: justify;
         }
 
         .activity-btn {
-            background: linear-gradient(45deg, #ff0040, #ff6b6b);
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #00ffff);
+            background-size: 300% 300%;
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            align-self: flex-start;
+            margin-top: auto;
+            animation: btnGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes btnGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .activity-btn::before {
@@ -142,8 +240,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
         }
 
         .activity-btn:hover::before {
@@ -151,19 +249,37 @@
         }
 
         .activity-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 0, 64, 0.5);
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 64, 0.6);
+            background-size: 400% 400%;
         }
 
         .activity-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.95);
+        }
+
+        .activity-btn.clicked {
+            animation: btnClick 0.6s ease;
+        }
+
+        @keyframes btnClick {
+            0% { transform: scale(1); }
+            25% { transform: scale(0.95) rotate(5deg); }
+            50% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
         .footer {
             text-align: center;
-            color: #666666;
+            color: #888888;
             font-size: 0.9rem;
             animation: fadeIn 1s ease-out 1s both;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .floating-particles {
@@ -178,27 +294,60 @@
 
         .particle {
             position: absolute;
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            opacity: 0.7;
+        }
+
+        .particle.type1 {
             width: 4px;
             height: 4px;
             background: #ff0040;
-            border-radius: 50%;
-            animation: float 8s infinite linear;
-            opacity: 0.6;
+        }
+
+        .particle.type2 {
+            width: 6px;
+            height: 6px;
+            background: #00ffff;
+        }
+
+        .particle.type3 {
+            width: 3px;
+            height: 3px;
+            background: #ff6b6b;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg) scale(0);
                 opacity: 0;
             }
             10% {
-                opacity: 0.6;
+                opacity: 0.7;
+                transform: translateY(90vh) rotate(45deg) scale(1);
             }
             90% {
-                opacity: 0.6;
+                opacity: 0.7;
+                transform: translateY(-10vh) rotate(315deg) scale(1);
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(-20vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .click-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
                 opacity: 0;
             }
         }
@@ -246,87 +395,121 @@
             
             .activity-card {
                 padding: 1.5rem;
+                min-height: 250px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="animated-bg"></div>
     <div class="floating-particles" id="particles"></div>
     
     <div class="container">
         <div class="header">
-            <h1 class="title">Embedded Systems 2 Activities</h1>
-            <p class="subtitle">Renz Martin V. Rebogio - BSCPE4</p>
+            <h1 class="title">Renz Martin V. Rebogio - BSCPE4</h1>
+            <p class="subtitle">Embedded Systems 2 Activities</p>
         </div>
 
         <div class="activities-grid">
             <div class="activity-card">
-                <h3 class="activity-title">ACT1.1</h3>
-                <p class="activity-description">Writing an HTML file using Notepad.</p>
-                <a href="https://embeddedsystems-act1.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                <div class="card-content">
+                    <h3 class="activity-title">ACT1.1</h3>
+                    <p class="activity-description">Mastering the fundamentals of web development through hands-on HTML creation using Notepad. This foundational exercise demonstrates the pure essence of web markup without IDE assistance.</p>
+                    <a href="https://embeddedsystems-act1.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                </div>
             </div>
 
             <div class="activity-card">
-                <h3 class="activity-title">ACT1.2</h3>
-                <p class="activity-description">An HTML document that help to learn the basic principles of Web documents by applying different formatting tags.</p>
-                <a href="https://embeddedsystems-act2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                <div class="card-content">
+                    <h3 class="activity-title">ACT1.2</h3>
+                    <p class="activity-description">Comprehensive exploration of HTML formatting techniques and document structure. This activity showcases various text formatting tags, semantic elements, and styling approaches to create well-structured web documents.</p>
+                    <a href="https://embeddedsystems-act2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                </div>
             </div>
 
             <div class="activity-card">
-                <h3 class="activity-title">RESUME</h3>
-                <p class="activity-description">Creating an online resume that uses different formatting tags. Includes unordered lists and inline graphic image.</p>
-                <a href="https://embeddedsystems-resume.netlify.app/" class="activity-btn" target="_blank">View Resume</a>
+                <div class="card-content">
+                    <h3 class="activity-title">RESUME</h3>
+                    <p class="activity-description">Professional online resume showcasing advanced HTML formatting, unordered lists, and inline graphic integration. Demonstrates real-world application of web development skills in creating presentation-ready content.</p>
+                    <a href="https://embeddedsystems-resume.netlify.app/" class="activity-btn" target="_blank">View Resume</a>
+                </div>
             </div>
 
             <div class="activity-card">
-                <h3 class="activity-title">ACT2.2</h3>
-                <p class="activity-description">Created a text table. Understood how to control the appearance of a table and text.</p>
-                <a href="https://embeddedsystems2-act2part2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                <div class="card-content">
+                    <h3 class="activity-title">ACT2.2</h3>
+                    <p class="activity-description">Advanced table creation and manipulation techniques. This project focuses on mastering table structure, cell formatting, and visual presentation control to create professional data displays.</p>
+                    <a href="https://embeddedsystems2-act2part2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                </div>
             </div>
 
             <div class="activity-card">
-                <h3 class="activity-title">ACT2.3</h3>
-                <p class="activity-description">Created frames for Web presentation. Understood how to control the appearance and placement of frames. Learned how to control the behavior of hyperlinks on a page with frames.</p>
-                <a href="https://embeddedsystems-act2part3.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                <div class="card-content">
+                    <h3 class="activity-title">ACT2.3</h3>
+                    <p class="activity-description">Sophisticated frame-based web architecture implementation. Explores frame creation, positioning, and hyperlink behavior control to build complex, multi-panel web presentations with seamless navigation.</p>
+                    <a href="https://embeddedsystems-act2part3.netlify.app/" class="activity-btn" target="_blank">View Project</a>
+                </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>&copy; 2025 Portfolio Activities. Designed with passion.</p>
+            <p>&copy; 2025 Portfolio Activities • Designed with Innovation & Passion</p>
         </div>
     </div>
 
     <script>
-        // Create floating particles
+        // Enhanced particle system
         function createParticle() {
             const particle = document.createElement('div');
-            particle.className = 'particle';
+            const types = ['type1', 'type2', 'type3'];
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            
+            particle.className = `particle ${randomType}`;
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
             particle.style.animationDelay = Math.random() * 2 + 's';
             document.getElementById('particles').appendChild(particle);
 
-            // Remove particle after animation
             setTimeout(() => {
                 particle.remove();
-            }, 8000);
+            }, 10000);
         }
 
-        // Create particles periodically
-        setInterval(createParticle, 300);
+        // Create particles more frequently
+        setInterval(createParticle, 200);
 
-        // Add smooth scroll behavior for better UX
+        // Enhanced button interactions
         document.querySelectorAll('.activity-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
-                // Add a subtle click effect
-                this.style.transform = 'scale(0.95)';
+                e.preventDefault();
+                
+                // Add click animation class
+                this.classList.add('clicked');
+                
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.classList.add('click-ripple');
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                this.appendChild(ripple);
+                
+                // Remove animations and open link
                 setTimeout(() => {
-                    this.style.transform = 'scale(1.05)';
-                }, 100);
+                    this.classList.remove('clicked');
+                    ripple.remove();
+                    window.open(this.href, '_blank');
+                }, 600);
             });
         });
 
-        // Add glow effect on mouse move
+        // Enhanced mouse tracking for cards
         document.addEventListener('mousemove', function(e) {
             const cards = document.querySelectorAll('.activity-card');
             cards.forEach(card => {
@@ -339,6 +522,24 @@
                     card.style.setProperty('--mouse-y', y + 'px');
                 }
             });
+        });
+
+        // Add smooth entrance animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.activity-card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
