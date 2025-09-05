@@ -16,7 +16,7 @@
             background: 
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 150, 180, 0.2) 0%, transparent 50%),
                 linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
             color: #ffffff;
@@ -33,7 +33,7 @@
             z-index: -2;
             background: 
                 linear-gradient(45deg, transparent 30%, rgba(255, 0, 64, 0.1) 70%),
-                linear-gradient(-45deg, transparent 30%, rgba(0, 255, 255, 0.1) 70%);
+                linear-gradient(-45deg, transparent 30%, rgba(255, 100, 150, 0.1) 70%);
             animation: bgShift 20s ease-in-out infinite;
         }
 
@@ -69,7 +69,7 @@
             transform: translateX(-50%);
             width: 100px;
             height: 2px;
-            background: linear-gradient(45deg, #ff0040, #ff6b6b, #00ffff);
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999);
             animation: lineGlow 2s ease-in-out infinite;
         }
 
@@ -81,7 +81,7 @@
         .title {
             font-size: 3.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff0040, #ff6b6b, #00ffff, #ff0040);
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999, #ff0040);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -147,7 +147,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), rgba(0, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), rgba(255, 100, 150, 0.1), transparent);
             transition: left 0.6s ease;
         }
 
@@ -175,7 +175,7 @@
         .activity-card:hover {
             transform: translateY(-15px) scale(1.02);
             border-color: #ff0040;
-            box-shadow: 0 25px 50px rgba(255, 0, 64, 0.3), 0 0 30px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(255, 0, 64, 0.3), 0 0 30px rgba(255, 100, 150, 0.2);
             background: rgba(40, 40, 80, 0.9);
         }
 
@@ -207,7 +207,7 @@
         }
 
         .activity-btn {
-            background: linear-gradient(45deg, #ff0040, #ff6b6b, #00ffff);
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999);
             background-size: 300% 300%;
             color: white;
             border: none;
@@ -308,13 +308,13 @@
         .particle.type2 {
             width: 6px;
             height: 6px;
-            background: #00ffff;
+            background: #ff6b6b;
         }
 
         .particle.type3 {
             width: 3px;
             height: 3px;
-            background: #ff6b6b;
+            background: #ff9999;
         }
 
         @keyframes float {
