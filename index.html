@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Activities</title>
+    <title>Renz Martin V. Rebogio - Portfolio</title>
     <link rel="icon" href="hero-bg-futuristic.jpg">
     <style>
         * {
@@ -12,75 +12,51 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            height: 100%;
+            overflow: hidden;
             font-family: 'Arial', sans-serif;
             background: 
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(255, 150, 180, 0.2) 0%, transparent 50%),
                 linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-            color: #ffffff;
-            overflow-x: hidden;
-            position: relative;
         }
 
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                linear-gradient(45deg, transparent 30%, rgba(255, 0, 64, 0.1) 70%),
-                linear-gradient(-45deg, transparent 30%, rgba(255, 100, 150, 0.1) 70%);
-            animation: bgShift 20s ease-in-out infinite;
+        frameset {
+            border: none;
         }
 
-        @keyframes bgShift {
-            0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
-            50% { opacity: 0.8; transform: scale(1.1) rotate(2deg); }
+        frame {
+            border: 1px solid rgba(255, 0, 64, 0.2);
+            background: rgba(30, 30, 60, 0.8);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
+        .no-frames-message {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            position: relative;
-        }
-
-        .header {
+            justify-content: center;
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
             text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeInDown 1s ease-out;
-            position: relative;
+            padding: 2rem;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999);
-            animation: lineGlow 2s ease-in-out infinite;
+        .no-frames-content {
+            background: rgba(30, 30, 60, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 0, 64, 0.2);
+            max-width: 600px;
         }
 
-        @keyframes lineGlow {
-            0%, 100% { opacity: 0.5; width: 100px; }
-            50% { opacity: 1; width: 200px; }
-        }
-
-        .title {
-            font-size: 3.5rem;
+        .no-frames-title {
+            font-size: 2.5rem;
             font-weight: bold;
             background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999, #ff0040);
             background-size: 300% 300%;
@@ -88,7 +64,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
             animation: gradientShift 3s ease-in-out infinite;
         }
 
@@ -97,135 +72,26 @@
             50% { background-position: 100% 50%; }
         }
 
-        .subtitle {
-            font-size: 1.2rem;
+        .no-frames-text {
             color: #cccccc;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1000px;
-            margin-bottom: 3rem;
-        }
-
-        .activity-card {
-            background: rgba(30, 30, 60, 0.8);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: left;
-            border: 1px solid rgba(255, 0, 64, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 1s ease-out;
-            display: flex;
-            flex-direction: column;
-            min-height: 280px;
-        }
-
-        .activity-card:nth-child(1) { animation-delay: 0.1s; }
-        .activity-card:nth-child(2) { animation-delay: 0.2s; }
-        .activity-card:nth-child(3) { animation-delay: 0.3s; }
-        .activity-card:nth-child(4) { animation-delay: 0.4s; }
-        .activity-card:nth-child(5) { animation-delay: 0.5s; }
-
-        .activity-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), rgba(255, 100, 150, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .activity-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 0, 64, 0.1) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .activity-card:hover::before {
-            left: 100%;
-        }
-
-        .activity-card:hover::after {
-            opacity: 1;
-        }
-
-        .activity-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            border-color: #ff0040;
-            box-shadow: 0 25px 50px rgba(255, 0, 64, 0.3), 0 0 30px rgba(255, 100, 150, 0.2);
-            background: rgba(40, 40, 80, 0.9);
-        }
-
-        .card-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .activity-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ffffff, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .activity-description {
-            color: #bbbbbb;
+            font-size: 1.1rem;
+            line-height: 1.6;
             margin-bottom: 2rem;
-            line-height: 1.8;
-            flex-grow: 1;
-            font-size: 1rem;
-            text-align: justify;
         }
 
-        .activity-btn {
+        .modern-link {
             background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999);
             background-size: 300% 300%;
             color: white;
-            border: none;
+            text-decoration: none;
             padding: 14px 35px;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.4s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            align-self: flex-start;
-            margin-top: auto;
+            display: inline-block;
+            transition: all 0.4s ease;
             animation: btnGlow 3s ease-in-out infinite;
         }
 
@@ -234,338 +100,38 @@
             50% { background-position: 100% 50%; }
         }
 
-        .activity-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .activity-btn:hover::before {
-            left: 100%;
-        }
-
-        .activity-btn:hover {
+        .modern-link:hover {
             transform: scale(1.08) translateY(-2px);
             box-shadow: 0 15px 35px rgba(255, 0, 64, 0.6);
-            background-size: 400% 400%;
-        }
-
-        .activity-btn:active {
-            transform: scale(0.95);
-        }
-
-        .activity-btn.clicked {
-            animation: btnClick 0.6s ease;
-        }
-
-        @keyframes btnClick {
-            0% { transform: scale(1); }
-            25% { transform: scale(0.95) rotate(5deg); }
-            50% { transform: scale(1.1) rotate(-5deg); }
-            75% { transform: scale(1.05) rotate(2deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-
-        .footer {
-            text-align: center;
-            color: #888888;
-            font-size: 0.9rem;
-            animation: fadeIn 1s ease-out 1s both;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .floating-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 10s infinite linear;
-            opacity: 0.7;
-        }
-
-        .particle.type1 {
-            width: 4px;
-            height: 4px;
-            background: #ff0040;
-        }
-
-        .particle.type2 {
-            width: 6px;
-            height: 6px;
-            background: #ff6b6b;
-        }
-
-        .particle.type3 {
-            width: 3px;
-            height: 3px;
-            background: #ff9999;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-                transform: translateY(90vh) rotate(45deg) scale(1);
-            }
-            90% {
-                opacity: 0.7;
-                transform: translateY(-10vh) rotate(315deg) scale(1);
-            }
-            100% {
-                transform: translateY(-20vh) rotate(360deg) scale(0);
-                opacity: 0;
-            }
-        }
-
-        .click-ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .title {
-                font-size: 2.5rem;
-            }
-            
-            .activities-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .activity-card {
-                padding: 1.5rem;
-                min-height: 250px;
-            }
         }
     </style>
 </head>
-<body>
-    <div class="animated-bg"></div>
-    <div class="floating-particles" id="particles"></div>
+
+<frameset rows="120,*" frameborder="0" border="0" framespacing="2" noresize>
+    <!-- Top frame for banner -->
+    <frame src="banner.html" name="banner" noresize scrolling="no">
     
-    <div class="container">
-        <div class="header">
-            <h1 class="title">Renz Martin V. Rebogio - BSCPE4</h1>
-            <p class="subtitle">Embedded Systems 2 Activities</p>
-        </div>
-
-        <div class="activities-grid">
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 1.1 – Basic HTML Document</h3>
-                    <p class="activity-description">Create a simple HTML file in Notepad and understand the basic structure of an HTML document.</p>
-                    <a href="https://embeddedsystems-act1.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 1.2 – HTML Formatting</h3>
-                    <p class="activity-description">Learn the principles of web documents, apply formatting tags, and build a basic HTML page.</p>
-                    <a href="https://embeddedsystems-act2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 2.1 - Resume with Lists and Images</h3>
-                    <p class="activity-description">Practice creating unordered lists, adding inline images, and designing an online resume using formatting tags.</p>
-                    <a href="https://embeddedsystems-resume.netlify.app/" class="activity-btn" target="_blank">View Resume</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 2.2 – HTML Tables</h3>
-                    <p class="activity-description">Build and style tables, merge rows and columns, and use nested tables to enhance page layout.</p>
-                    <a href="https://embeddedsystems2-act2part2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 2.3 – Using Frames in HTML</h3>
-                    <p class="activity-description">Create web frames, adjust their layout, and control hyperlink behavior within framed pages.</p>
-                    <a href="https://embeddedsystems-act2part3.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 3.1 – Introduction to CSS</h3>
-                    <p class="activity-description">Get introduced to Cascading Style Sheets (CSS), their structure, and advantages for web design.</p>
-                    <a href="https://embeddedsystems2-act3-1.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 3.2 – CSS Text Formatting</h3>
-                    <p class="activity-description">Learn CSS elements and properties to format and style text effectively.</p>
-                    <a href="https://embeddedsystems2-act3-2.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
-            </div>
-
-            <div class="activity-card">
-                <div class="card-content">
-                    <h3 class="activity-title">ACT 3.3 – Triangle Classification Program</h3>
-                    <p class="activity-description">Write a JavaScript function that classifies triangles as equilateral, isosceles, or scalene based on user input.</p>
-                    <a href="https://embeddedsystems2-act3-3.netlify.app/" class="activity-btn" target="_blank">View Project</a>
-                </div>
+    <!-- Bottom frameset -->
+    <frameset cols="280,*" frameborder="0" border="0" framespacing="2" noresize>
+        <!-- Left navigation frame -->
+        <frame src="nav.html" name="navigation" noresize scrolling="auto">
+        <!-- Right content frame -->
+        <frame src="home.html" name="content" noresize scrolling="auto">
+    </frameset>
+    
+    <noframes>
+        <div class="no-frames-message">
+            <div class="no-frames-content">
+                <h1 class="no-frames-title">Modern Browser Required</h1>
+                <p class="no-frames-text">
+                    Your browser doesn't support frames. Please upgrade to a modern browser 
+                    or visit my activities directly using the link below.
+                </p>
+                <a href="https://embeddedsystems-act1.netlify.app/" class="modern-link" target="_blank">
+                    View My Activities
+                </a>
             </div>
         </div>
-
-        <div class="footer">
-            <p>&copy; 2025 Portfolio Activities</p>
-        </div>
-    </div>
-
-    <script>
-        // Enhanced particle system
-        function createParticle() {
-            const particle = document.createElement('div');
-            const types = ['type1', 'type2', 'type3'];
-            const randomType = types[Math.floor(Math.random() * types.length)];
-            
-            particle.className = `particle ${randomType}`;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            document.getElementById('particles').appendChild(particle);
-
-            setTimeout(() => {
-                particle.remove();
-            }, 10000);
-        }
-
-        // Create particles more frequently
-        setInterval(createParticle, 200);
-
-        // Enhanced button interactions
-        document.querySelectorAll('.activity-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Add click animation class
-                this.classList.add('clicked');
-                
-                // Create ripple effect
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.classList.add('click-ripple');
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                
-                this.appendChild(ripple);
-                
-                // Remove animations and open link
-                setTimeout(() => {
-                    this.classList.remove('clicked');
-                    ripple.remove();
-                    window.open(this.href, '_blank');
-                }, 600);
-            });
-        });
-
-        // Enhanced mouse tracking for cards
-        document.addEventListener('mousemove', function(e) {
-            const cards = document.querySelectorAll('.activity-card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                    card.style.setProperty('--mouse-x', x + 'px');
-                    card.style.setProperty('--mouse-y', y + 'px');
-                }
-            });
-        });
-
-        // Add smooth entrance animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.activity-card').forEach(card => {
-            observer.observe(card);
-        });
-    </script>
-</body>
+    </noframes>
+</frameset>
 </html>

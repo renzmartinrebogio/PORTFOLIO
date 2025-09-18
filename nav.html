@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #000 0%, #1a1a2e 80%);
+            color: #ffffff;
+            height: 100vh;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 1px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 1rem;
+            animation: fadeInLeft 0.6s ease-out;
+        }
+
+        .nav-item:nth-child(1) { animation-delay: 0.1s; }
+        .nav-item:nth-child(2) { animation-delay: 0.2s; }
+        .nav-item:nth-child(3) { animation-delay: 0.3s; }
+        .nav-item:nth-child(4) { animation-delay: 0.4s; }
+        .nav-item:nth-child(5) { animation-delay: 0.5s; }
+        .nav-item:nth-child(6) { animation-delay: 0.6s; }
+
+        .nav-link {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            background: rgba(30, 30, 60, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 0, 64, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(40, 40, 80, 0.8);
+            border-color: #ff0040;
+            color: #ffffff;
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(255, 0, 64, 0.2);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(45deg, rgba(255, 0, 64, 0.3), rgba(255, 107, 107, 0.3));
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .profile-section {
+            background: rgba(30, 30, 60, 0.6);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 0, 64, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff0040, #ff6b6b);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 0, 64, 0.3);
+        }
+
+        .profile-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-role {
+            font-size: 0.85rem;
+            color: #cccccc;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2 class="nav-title">Navigation</h2>
+    
+    <ul class="nav-menu">
+        <li class="nav-item">
+            <a href="#" class="nav-link active" onclick="loadContent('home')" id="home-link">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="loadContent('about')" id="about-link">About Me</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="loadContent('activities')" id="activities-link">Activities</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="loadContent('resume')" id="resume-link">Resume</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="loadContent('contact')" id="contact-link">Contact</a>
+        </li>
+    </ul>
+
+    <div class="profile-section">
+        <div class="profile-avatar">RR</div>
+        <div class="profile-name">Renz Martin</div>
+        <div class="profile-role">BSCPE4 Student</div>
+    </div>
+
+    <script>
+        function loadContent(section) {
+            // Remove active class from all links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked link
+            document.getElementById(section + '-link').classList.add('active');
+            
+            // Load content in the content frame
+            let contentUrl;
+            switch(section) {
+                case 'home':
+                    contentUrl = 'home.html';
+                    break;
+                case 'about':
+                    contentUrl = 'about.html';
+                    break;
+                case 'activities':
+                    contentUrl = 'activities.html';
+                    break;
+                case 'resume':
+                    contentUrl = 'resume.html';
+                    break;
+                case 'contact':
+                    contentUrl = 'contact.html';
+                    break;
+                default:
+                    contentUrl = 'home.html';
+            }
+            
+            // Load content in parent frameset's content frame
+            parent.frames['content'].location.href = contentUrl;
+        }
+
+        // Add click animations
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.3);
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                // Get the onclick function and execute it
+                const onclickAttr = this.getAttribute('onclick');
+                if (onclickAttr) {
+                    eval(onclickAttr);
+                }
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

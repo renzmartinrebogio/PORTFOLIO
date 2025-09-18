@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                linear-gradient(135deg, #000 0%, #1a1a2e 100%);
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(255, 0, 64, 0.1) 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(255, 100, 150, 0.1) 70%);
+            animation: bgShift 15s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.6; transform: scale(1.05) rotate(1deg); }
+        }
+
+        .banner-content {
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999, #ff0040);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
+            animation: gradientShift 3s ease-in-out infinite;
+            letter-spacing: 1px;
+        }
+
+        .banner-subtitle {
+            font-size: 0.9rem;
+            color: #cccccc;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .banner-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(45deg, #ff0040, #ff6b6b, #ff9999);
+            margin: 1rem auto 0;
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.5; width: 100px; }
+            50% { opacity: 1; width: 150px; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating particles */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+            opacity: 0.6;
+        }
+
+        .particle.type1 {
+            width: 3px;
+            height: 3px;
+            background: #ff0040;
+        }
+
+        .particle.type2 {
+            width: 4px;
+            height: 4px;
+            background: #ff6b6b;
+        }
+
+        .particle.type3 {
+            width: 2px;
+            height: 2px;
+            background: #ff9999;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+                transform: translateY(90vh) rotate(45deg) scale(1);
+            }
+            90% {
+                opacity: 0.6;
+                transform: translateY(-10vh) rotate(315deg) scale(1);
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="floating-particles" id="particles"></div>
+    
+    <div class="banner-content">
+        <h1 class="banner-title">Renz Martin V. Rebogio</h1>
+        <p class="banner-subtitle">BSCPE4 - Portfolio</p>
+        <div class="banner-line"></div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            const types = ['type1', 'type2', 'type3'];
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            
+            particle.className = `particle ${randomType}`;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 8000);
+        }
+
+        // Create particles at intervals
+        setInterval(createParticle, 400);
+
+        // Initial particles
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+    </script>
+</body>
+</html>
